@@ -9,6 +9,7 @@
 namespace robust {
 namespace core {
   class Robot {
+      
       Robot();
       ~Robot();
   };
