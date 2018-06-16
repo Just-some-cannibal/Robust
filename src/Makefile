@@ -1,7 +1,7 @@
 # Program name
 NAME = Robust.a
 # Compiler command
-CC = g++-6
+CC = g++
 
 # The root directory of headers
 IDIR = .

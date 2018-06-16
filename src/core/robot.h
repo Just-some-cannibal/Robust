@@ -5,12 +5,15 @@
 #include <algorithm>
 #include <future>
 #include <thread>
+#include "core/motor.h"
 
 namespace robust {
-namespace core {
   class Robot {
-      Robot();
-      ~Robot();
+  public:
+    double Mass;
+    std::vector< Motor > Motors;
+    double Friction;
+    Robot();
+    ~Robot();
   };
-}
 }
