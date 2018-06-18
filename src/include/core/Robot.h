@@ -7,7 +7,7 @@
 #include <thread>
 #include "core/motor.h"
 
-namespace robust {
+namespace Robust {
   class Robot {
   public:
     double Mass;

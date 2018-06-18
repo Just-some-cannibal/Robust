@@ -6,6 +6,7 @@
 #include <chrono>
 #include <unordered_map>
 #include <time.h>
+#include "util/logger.h"
 
 using namespace std::chrono;
 
@@ -25,18 +26,20 @@ class Task
 
 class TaskManager
 {
-    static int Dt;
-    static std::mutex Mutex;
-    static std::unordered_map<int, Task> Tasks; // Map of all tasks
+    int Dt;
+    std::mutex Mutex;
+    std::unordered_map<int, Task> Tasks; // Map of all tasks
 
-    static std::thread TaskThread; // Thead where the tasks are run on
+    std::thread TaskThread; // Thead where the tasks are run on
 
-    static void TaskHandler();
+    void TaskHandler();
 
-    static const int TimesPerSecond; // Number of times the tasks are run per second
+    const int TimesPerSecond; // Number of times the tasks are run per second
   public:
+    TaskManager(int);
     // Registers a task to be repeated and returns and id for use in removal
-    static int AddTask(std::function<void(double)>);
-    static void RemoveTask(int);
+    int AddTask(std::function<void(double)>);
+    void RemoveTask(int);
 };
+
 } // namespace Robust

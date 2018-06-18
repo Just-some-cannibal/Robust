@@ -1,5 +1,5 @@
 #include "core/Robot.h"
-using namespace robust;
+using namespace Robust;
 Robot::Robot() {
     
 }

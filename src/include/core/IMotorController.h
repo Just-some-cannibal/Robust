@@ -1,6 +1,6 @@
 #pragma once
 
-namespace robust {
+namespace Robust {
     class IMotorController {
     public:
         virtual void SetThrottle(double);

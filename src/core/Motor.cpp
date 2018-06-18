@@ -1,6 +1,6 @@
 #include "core/Motor.h"
 
-using namespace robust;
+using namespace Robust;
 
 Motor::Motor(IMotorController controller,
              double stallTorque,

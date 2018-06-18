@@ -8,9 +8,7 @@
 #include <iomanip>
 #include <ctime>
 
-namespace robust {
-namespace util {
-  void log (std::string log);
-  void err (std::string log);
-}
+namespace Robust {
+  extern void log (std::string log);
+  extern void err (std::string log);
 }

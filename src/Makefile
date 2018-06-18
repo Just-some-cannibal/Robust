@@ -1,10 +1,8 @@
-# Program name
-NAME = Robust.a
 # Compiler command
 CC = g++
 
 # The root directory of headers
-IDIR = .
+IDIR = ./include
 
 # The root directory of the includes
 ODIR = .
@@ -13,21 +11,33 @@ ODIR = .
 IPRMS = $(INC:%=-I%)
 
 # Compile Flags
-CFLAGS=-I $(IDIR) -std=c++11 -lpthread -Wall
+CFLAGS=-I $(IDIR) -std=c++14 -lpthread -Wall
 
 # Linker Flags
 LFLAGS = -pthread
 
-DEPS = $(shell find . -name '*.cpp')
+HEADERS = $(shell find ./include -name '*.h')
+
+# All singlefile tests: A quick macro for making test cases
+TESTNAMES = task-manager socket-server
+
+DEPS = $(shell find ./core -name '*.cpp') $(shell find ./util -name '*.cpp')
 OBJECTS = $(DEPS:.cpp=.o)
 
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
+Robust.a: $(OBJECTS)  
+	ar rcs Robust.a $(OBJECTS)
 
-%.o: %.cpp $(DEPS)
+Tests: $(TESTNAMES);
+
+$(TESTNAMES): Robust.a
+	g++ -o ./tests/$@/$@ ./tests/$@/$@.cpp ./Robust.a $(CFLAGS) $(LFLAGS) 
+
+
+%.o: %.cpp $(DEPS) $(HEADERS)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Cleans up object files
 .PHONY: clean
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
+	rm $(OBJECTS)
+

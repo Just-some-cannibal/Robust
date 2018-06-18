@@ -4,7 +4,7 @@
 #include <thread>
 #include "core/IMotorController.h"
 
-namespace robust
+namespace Robust
 {
 
 class Motor
