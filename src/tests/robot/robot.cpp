@@ -50,12 +50,12 @@ class MotorController : public IMotorController
         else
         {
             val1 = 0;
-            val2 = value;
+            val2 = abs(value);
         }
 
         // System command that sets gpio;
-        system(("echo " + to_string(Pin1) + "=" + to_string(val1) + " " +
-                to_string(Pin2) + "=" + to_string(val2) + " > /dev/pi-blaster")
+        system(("echo \"" + to_string(Pin1) + "=" + to_string(val1) + " " +
+                to_string(Pin2) + "=" + to_string(val2) + "\" > /dev/pi-blaster")
                    .c_str());
     }
 };
@@ -74,20 +74,10 @@ class RobotClient : public ISocketClient
         {
             try
             {
-                received = ReceiveData();
-                // Janky way to get a throttle
-                switch (received[0])
-                {
-                case '-':
-                    throttle = -1;
-                    break;
-                case '0':
-                    throttle = 0;
-                    break;
-                case '1':
-                    throttle = 1;
-                    break;
-                }
+                received = ReceiveData();  
+                try {
+                    throttle = std::stod(received);
+                } catch(...) {continue;}
             }
             catch (...)
             {
@@ -103,6 +93,9 @@ class RobotServer : public ISocketServer
   public:
     RobotServer() : ISocketServer(20000)
     {
+    }
+    ~RobotServer() {
+        close(Port);
     }
 
   private:
