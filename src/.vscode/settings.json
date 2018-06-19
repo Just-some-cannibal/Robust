@@ -56,6 +56,13 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "cerrno": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "numeric": "cpp",
+        "sstream": "cpp"
     }
 }

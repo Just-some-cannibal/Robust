@@ -19,7 +19,7 @@ LFLAGS = -pthread
 HEADERS = $(shell find ./include -name '*.h')
 
 # All singlefile tests: A quick macro for making test cases
-TESTNAMES = task-manager socket-server
+TESTNAMES = task-manager socket-server robot
 
 DEPS = $(shell find ./core -name '*.cpp') $(shell find ./util -name '*.cpp')
 OBJECTS = $(DEPS:.cpp=.o)
