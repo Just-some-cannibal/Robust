@@ -34,6 +34,7 @@ class MotorController : public IMotorController
     void SetThrottle(double value)
     {
         // Checks if the value is out of range
+        if (value == Throttle) return;
         if (value > 1)
             value = 1;
         if (value < -1)
