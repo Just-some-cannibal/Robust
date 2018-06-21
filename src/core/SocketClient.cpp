@@ -1,12 +1,14 @@
-#include "core/ISocketClient.h"
+#include "core/SocketClient.h"
 
 using namespace Robust;
 
-ISocketClient::ISocketClient(int socket) : Socket(socket)
+SocketClient::SocketClient(int socket) : Socket(socket)
 {
 }
 
-std::string ISocketClient::ReceiveData()
+
+
+std::string SocketClient::ReceiveData()
 {
     const int bufferSize = 4096;
     std::string buffer;
@@ -32,7 +34,7 @@ std::string ISocketClient::ReceiveData()
     return buffer;
 }
 
-void ISocketClient::SendData(std::string data) {
+void SocketClient::SendData(std::string data) {
     if (0 > send(Socket, data.data(), data.size(), MSG_NOSIGNAL)) {
         std::string err = strerror(errno);
         Robust::err("Error sending packet: ");

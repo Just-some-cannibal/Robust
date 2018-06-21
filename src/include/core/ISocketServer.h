@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "core/ISocketClient.h"
+#include "core/SocketClient.h"
 #include "util/logger.h"
 
 namespace Robust
@@ -19,6 +19,7 @@ namespace Robust
 class ISocketServer
 {
 protected:
+  const int Port;             // Port that the server is listening on
   std::thread ListenerThread; // Asynchronous listening for handshakes
   void Listener();            // Listens for handshakes
 
@@ -28,11 +29,11 @@ protected:
 
   int WaitForClient(); // Halts thread until there is a request
 
-  const int Port; // Port that the server is listening on
-
+  // FD to the server sock
   int ServerSock;
 
 public:
+  // Allows the option to join or detach from the thread
   void Join();
   void Detach();
   ISocketServer(int); // Constructs server with specified port
