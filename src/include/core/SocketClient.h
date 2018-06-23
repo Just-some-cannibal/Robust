@@ -15,7 +15,7 @@ namespace Robust
 {
 class SocketClient
 {
-  protected:
+  public:
     // Returns a string from the data returned from the socket
     // Returns a zero sized string if no data could be received
     std::string ReceiveData();
@@ -26,7 +26,6 @@ class SocketClient
     // FD for the client socket
     int Socket;
 
-  public:
     // Takes in client FD for a higher level interface to the socket
     SocketClient(int);
     virtual ~SocketClient();

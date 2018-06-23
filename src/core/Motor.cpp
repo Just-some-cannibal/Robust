@@ -56,10 +56,14 @@ double Motor::GetThrottle()
 void Motor::SetSpeed(double speed)
 {
     // If the speed is greater than the maxspeed, set throttle to 1
-    if (fabs(speed) > LoadlessSpeed)
+    if (fabs(speed) > GetMaxSpeed())
+    {
         SetThrottle((speed > 0) ? 1 : -1);
+        return;
+    }
     
-    
+    double Force = OpposingFriction + OpposingForce;
+    SetThrottle( speed / GetLoadLessSpeed() + Force / GetStallTorque() );
 }
 
 double Motor::GetSpeed()

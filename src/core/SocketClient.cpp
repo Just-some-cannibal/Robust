@@ -6,7 +6,10 @@ SocketClient::SocketClient(int socket) : Socket(socket)
 {
 }
 
-
+SocketClient::~SocketClient()
+{
+    close(Socket);
+}
 
 std::string SocketClient::ReceiveData()
 {
@@ -24,7 +27,9 @@ std::string SocketClient::ReceiveData()
             Robust::err("Error while receiving");
             throw new std::exception;
             break;
-        } else if (size == 0) {
+        }
+        else if (size == 0)
+        {
             return "";
         }
 
@@ -34,8 +39,10 @@ std::string SocketClient::ReceiveData()
     return buffer;
 }
 
-void SocketClient::SendData(std::string data) {
-    if (0 > send(Socket, data.data(), data.size(), MSG_NOSIGNAL)) {
+void SocketClient::SendData(std::string data)
+{
+    if (0 > send(Socket, data.data(), data.size(), MSG_NOSIGNAL))
+    {
         std::string err = strerror(errno);
         Robust::err("Error sending packet: ");
     }
